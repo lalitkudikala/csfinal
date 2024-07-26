@@ -3,15 +3,57 @@
 <head>
     <meta charset="utf-8">
     <title>Global Health and Life Expectancy</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .chart { margin: 20px; }
+        .dot { fill: steelblue; }
+        .bar { fill: steelblue; }
+        #tooltip {
+            position: absolute;
+            text-align: center;
+            width: 120px;
+            height: 50px;
+            padding: 2px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>Global Health and Life Expectancy</h1>
-    <nav>
-        <ul>
-            <li><a href="scene1.html">Life Expectancy Over Time</a></li>
-            <li><a href="scene2.html">Healthcare Expenditure by Country</a></li>
-            <li><a href="scene3.html">Mortality Rates by Cause</a></li>
-        </ul>
-    </nav>
+    <div id="scene-container" class="chart"></div>
+    <div class="nav-buttons">
+        <button id="prev-button" onclick="loadScene(currentScene - 1)" disabled>Previous</button>
+        <button id="next-button" onclick="loadScene(currentScene + 1)">Next</button>
+    </div>
+    <script>
+        const scenes = ["scene1.html", "scene2.html", "scene3.html"];
+        let currentScene = 0;
+
+        function loadScene(sceneIndex) {
+            if (sceneIndex < 0 || sceneIndex >= scenes.length) return;
+
+            d3.select("#scene-container").html("");
+
+            d3.html(scenes[sceneIndex]).then(function(data) {
+                d3.select("#scene-container").node().append(data.documentElement);
+
+                currentScene = sceneIndex;
+                document.getElementById("prev-button").disabled = currentScene === 0;
+                document.getElementById("next-button").disabled = currentScene === scenes.length - 1;
+            });
+        }
+
+        window.onload = function() {
+            loadScene(0);
+        }
+    </script>
 </body>
 </html>
+
