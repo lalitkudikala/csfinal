@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+button {
+    margin: 10px;
+}
+
+.chart {
+    margin: 20px;
+}
+
+.dot {
+    fill: steelblue;
+}
+
+.bar {
+    fill: steelblue;
+}
+
+#tooltip {
+    position: absolute;
+    text-align: center;
+    width: 120px;
+    height: 50px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
