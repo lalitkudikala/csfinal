@@ -68,8 +68,8 @@ function loadScene1() {
         // Add paragraph explaining trends
         d3.select("#scene-container").append("div")
             .attr("class", "paragraph")
-            .style("width", "1200px")
-            .style("margin-top", "10px")
+            .style("width", "800px")
+            .style("margin-top", "20px")
             .html("<p>This chart shows the life expectancy trends over time for various countries. It highlights the differences in life expectancy across countries and how it has changed from 2000 to 2022. As you can see all countries have had a gradual growth in life expectancy over the years due to medical advancements. The one anomaly shown is the drastic decrease from 2020 to 2021 caused by the coronavirus. However, the life expectancy rates went back up in 2022 due to the release of vaccines causing fewer deaths. It is important to note that since China had a strict lockdown during the pandemic, their life expectancy rates were not affected where as the USA and India had more laid-back lockdown rules causing far more deaths. Another observation can be made by looking at the growth rates for the countries’ life expectancies. India's rapid increase in life expectancy is largely due to its recent economic growth and significant improvements in healthcare infrastructure. In contrast, the USA and China have already achieved substantial advancements in medical innovation and public health, leading to more stabilized and slower growth rates in life expectancy. While India's growth highlights the benefits of emerging economic strength, the USA and China reflect the challenges of extending life expectancy in already advanced healthcare systems. </p>");
     });
 
