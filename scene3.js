@@ -1,11 +1,12 @@
 function loadScene3() {
-    d3.csv("mortality_rates.csv").then(function(data) {
+    d3.csv("healthcare_categories.csv").then(function(data) {
+        console.log("Data loaded:", data); // Debugging statement
         data.forEach(d => {
             d.Expenditure = +d.Expenditure;
         });
 
         var svg = d3.select("#scene-container").append("svg").attr("width", 1000).attr("height", 500);
-        var margin = {top: 50, right: 50, bottom: 50, left: 50};
+        var margin = {top: 50, right: 150, bottom: 50, left: 50};
         var width = 800 - margin.left - margin.right;
         var height = 400 - margin.top - margin.bottom;
 
@@ -21,6 +22,7 @@ function loadScene3() {
         });
 
         countries.forEach((country, i) => {
+            console.log("Processing country:", country); // Debugging statement
             var g = svg.append("g")
                 .attr("transform", `translate(${margin.left + i * 250 + 150}, ${height / 2})`);
 
@@ -57,7 +59,7 @@ function loadScene3() {
 
         // Add legend
         var legend = svg.append("g")
-            .attr("transform", `translate(${width + margin.left + 50}, ${margin.top})`);
+            .attr("transform", `translate(${width + margin.right}, ${margin.top})`);
 
         color.domain().forEach((category, i) => {
             legend.append("rect")
@@ -72,6 +74,8 @@ function loadScene3() {
                 .attr("y", i * 20 + 10)
                 .text(category);
         });
+    }).catch(function(error) {
+        console.error("Error loading the data:", error);
     });
 
     d3.select("body").append("div").attr("id", "tooltip").style("position", "absolute").style("text-align", "center").style("width", "120px").style("height", "50px").style("padding", "2px")
