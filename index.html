@@ -44,6 +44,10 @@
             d3.html(scenes[sceneIndex]).then(function(data) {
                 d3.select("#scene-container").node().append(data.documentElement);
 
+                if (sceneIndex === 0) loadScene1();
+                if (sceneIndex === 1) loadScene2();
+                if (sceneIndex === 2) loadScene3();
+
                 currentScene = sceneIndex;
                 document.getElementById("prev-button").disabled = currentScene === 0;
                 document.getElementById("next-button").disabled = currentScene === scenes.length - 1;
@@ -56,4 +60,3 @@
     </script>
 </body>
 </html>
-
