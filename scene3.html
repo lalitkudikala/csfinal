@@ -1,2 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="scene3.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Mortality Rates by Cause</title>
+    <style>
+        /* Tooltip CSS */
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: blue;
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 20px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Tooltip Box CSS */
+        .tooltip-box {
+            fill: yellow;
+            stroke: blue;
+            stroke-width: 1;
+            border-radius: 25px;
+        }
+
+        .tooltip-text {
+            fill: darkgreen;
+            font-size: 20px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body onload="loadScene3()">
+    <button class="prevbutton2" id="prevbutton2" onclick="window.location.href = 'scene2.html'">Previous</button>
+    <h1>
+        <center>
+            Mortality Rates by Cause
+        </center>
+    </h1>
+    <div id="scene3-container"></div>
+</body>
+</html>
 
 
