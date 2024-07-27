@@ -10,8 +10,8 @@ function loadScene1() {
         var width = 800 - margin.left - margin.right;
         var height = 400 - margin.top - margin.bottom;
 
-        var x = d3.scaleLinear().domain([2000, 2022]).range([0, width]);
-        var y = d3.scaleLinear().domain([60, 80]).range([height, 0]);
+        var x = d3.scaleLinear().domain(d3.extent(data, d => d.Year)).range([0, width]);
+        var y = d3.scaleLinear().domain([d3.min(data, d => d.Life_Expectancy) - 5, d3.max(data, d => d.Life_Expectancy) + 5]).range([height, 0]);
 
         var color = d3.scaleOrdinal(d3.schemeCategory10);
 
