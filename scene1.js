@@ -10,7 +10,7 @@ function loadScene1() {
         var width = 800 - margin.left - margin.right;
         var height = 400 - margin.top - margin.bottom;
 
-        var x = d3.scaleLinear().domain([2010, 2019]).range([0, width]);
+        var x = d3.scaleLinear().domain([2000, 2022]).range([0, width]);
         var y = d3.scaleLinear().domain([60, 80]).range([height, 0]);
 
         var color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -70,7 +70,7 @@ function loadScene1() {
             .attr("class", "paragraph")
             .style("width", "800px")
             .style("margin-top", "20px")
-            .html("<p>This chart shows the life expectancy trends over time for various countries. It highlights the differences in life expectancy across countries and how it has changed from 2010 to 2019.</p>");
+            .html("<p>This chart shows the life expectancy trends over time for various countries. It highlights the differences in life expectancy across countries and how it has changed from 2000 to 2022.</p>");
     });
 
     d3.select("body").append("div").attr("id", "tooltip").style("position", "absolute").style("text-align", "center").style("width", "120px").style("height", "50px").style("padding", "2px")
