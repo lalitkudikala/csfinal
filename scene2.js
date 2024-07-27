@@ -34,7 +34,7 @@ function loadScene2() {
                 d3.select("#tooltip").style("display", "none");
             });
 
-        g.append("text").attr("x", width / 2).attr("y", -10).attr("text-anchor", "middle").attr("class", "annotation").text("Healthcare Expenditure by Country (2019)");
+        g.append("text").attr("x", width / 2).attr("y", -10).attr("text-anchor", "middle").attr("class", "annotation").text("Current Healthcare Expenditure (% of GDP)");
     });
 
     d3.select("body").append("div").attr("id", "tooltip").style("position", "absolute").style("text-align", "center").style("width", "120px").style("height", "50px").style("padding", "2px")
