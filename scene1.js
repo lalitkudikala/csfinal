@@ -13,6 +13,8 @@ function loadScene1() {
         var x = d3.scaleLinear().domain([2010, 2019]).range([0, width]);
         var y = d3.scaleLinear().domain([60, 80]).range([height, 0]);
 
+        var color = d3.scaleOrdinal(d3.schemeCategory10);
+
         var g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
         var line = d3.line().x(d => x(d.Year)).y(d => y(d.Life_Expectancy));
@@ -28,9 +30,10 @@ function loadScene1() {
         countries.forEach(country => {
             var countryData = data.filter(d => d.Country === country);
 
-            g.append("path").datum(countryData).attr("fill", "none").attr("stroke", "steelblue").attr("stroke-width", 1.5).attr("d", line);
+            g.append("path").datum(countryData).attr("fill", "none").attr("stroke", color(country)).attr("stroke-width", 1.5).attr("d", line);
 
-            g.selectAll(".dot").data(countryData).enter().append("circle").attr("class", "dot").attr("cx", d => x(d.Year)).attr("cy", d => y(d.Life_Expectancy)).attr("r", 5)
+            g.selectAll(`.dot-${country.replace(/ /g, '-')}`).data(countryData).enter().append("circle").attr("class", `dot-${country.replace(/ /g, '-')}`)
+                .attr("cx", d => x(d.Year)).attr("cy", d => y(d.Life_Expectancy)).attr("r", 5).attr("fill", color(country))
                 .on("mouseover", function(event, d) {
                     d3.select(this).attr("r", 8);
                     d3.select("#tooltip").style("left", (event.pageX + 10) + "px").style("top", (event.pageY - 10) + "px").style("display", "inline-block")
