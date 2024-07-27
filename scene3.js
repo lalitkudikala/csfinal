@@ -1,58 +1,77 @@
 function loadScene3() {
-    d3.csv("mortality_rates.csv").then(function(data) {
+    d3.csv("healthcare_categories.csv").then(function(data) {
         data.forEach(d => {
-            d.Year = +d.Year;
-            d.Deaths = +d.Deaths;
+            d.Expenditure = +d.Expenditure;
         });
 
-        var svg = d3.select("#scene-container").append("svg").attr("width", 800).attr("height", 400);
+        var svg = d3.select("#scene-container").append("svg").attr("width", 1000).attr("height", 500);
         var margin = {top: 50, right: 50, bottom: 50, left: 50};
         var width = 800 - margin.left - margin.right;
         var height = 400 - margin.top - margin.bottom;
 
-        var causes = [...new Set(data.map(d => d.Cause))];
-        var nestedData = d3.nest()
-            .key(d => d.Country)
-            .key(d => d.Cause)
-            .rollup(leaves => d3.sum(leaves, d => d.Deaths))
-            .entries(data);
+        var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-        var color = d3.scaleOrdinal(d3.schemeCategory10).domain(causes);
-        var x = d3.scaleBand().domain(nestedData.map(d => d.key)).range([0, width]).padding(0.1);
-        var y = d3.scaleLinear().domain([0, d3.max(nestedData, d => d3.sum(d.values, v => v.value))]).range([height, 0]);
+        var pie = d3.pie().value(d => d.Expenditure);
+        var arc = d3.arc().outerRadius(100).innerRadius(0);
 
-        var g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-
-        g.append("g")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x));
-
-        g.append("g")
-            .call(d3.axisLeft(y));
-
-        nestedData.forEach(country => {
-            var countryGroup = g.append("g").attr("transform", `translate(${x(country.key)},0)`);
-
-            country.values.forEach((d, i) => {
-                countryGroup.append("rect")
-                    .attr("x", i * (x.bandwidth() / causes.length))
-                    .attr("y", y(d.value))
-                    .attr("width", x.bandwidth() / causes.length)
-                    .attr("height", height - y(d.value))
-                    .attr("fill", color(d.key))
-                    .on("mouseover", function(event, d) {
-                        d3.select(this).attr("fill", "orange");
-                        d3.select("#tooltip").style("left", (event.pageX + 10) + "px").style("top", (event.pageY - 10) + "px").style("display", "inline-block")
-                            .html(`Country: ${country.key}<br>Cause: ${d.key}<br>Deaths: ${d.value}`);
-                    })
-                    .on("mouseout", function() {
-                        d3.select(this).attr("fill", color(d.key));
-                        d3.select("#tooltip").style("display", "none");
-                    });
-            });
+        var countries = ["USA", "India", "China"];
+        var countryData = {};
+        countries.forEach(country => {
+            countryData[country] = data.filter(d => d.Country === country);
         });
 
-        g.append("text").attr("x", width / 2).attr("y", -10).attr("text-anchor", "middle").attr("class", "annotation").text("Mortality Rates by Cause of Death (2010)");
+        countries.forEach((country, i) => {
+            var g = svg.append("g")
+                .attr("transform", `translate(${margin.left + i * 250 + 150}, ${height / 2})`);
+
+            var arcs = g.selectAll(".arc")
+                .data(pie(countryData[country]))
+                .enter().append("g")
+                .attr("class", "arc");
+
+            arcs.append("path")
+                .attr("d", arc)
+                .attr("fill", d => color(d.data.Category))
+                .on("mouseover", function(event, d) {
+                    d3.select("#tooltip").style("left", (event.pageX + 10) + "px").style("top", (event.pageY - 10) + "px").style("display", "inline-block")
+                        .html(`Country: ${d.data.Country}<br>Category: ${d.data.Category}<br>Expenditure: ${d.data.Expenditure}%`);
+                })
+                .on("mouseout", function() {
+                    d3.select("#tooltip").style("display", "none");
+                });
+
+            // Add labels
+            arcs.append("text")
+                .attr("transform", d => `translate(${arc.centroid(d)})`)
+                .attr("dy", ".35em")
+                .text(d => `${d.data.Expenditure}%`);
+
+            // Add country title
+            g.append("text")
+                .attr("x", 0)
+                .attr("y", -120)
+                .attr("text-anchor", "middle")
+                .attr("class", "annotation")
+                .text(country);
+        });
+
+        // Add legend
+        var legend = svg.append("g")
+            .attr("transform", `translate(${width + margin.left + 50}, ${margin.top})`);
+
+        color.domain().forEach((category, i) => {
+            legend.append("rect")
+                .attr("x", 0)
+                .attr("y", i * 20)
+                .attr("width", 10)
+                .attr("height", 10)
+                .attr("fill", color(category));
+
+            legend.append("text")
+                .attr("x", 20)
+                .attr("y", i * 20 + 10)
+                .text(category);
+        });
     });
 
     d3.select("body").append("div").attr("id", "tooltip").style("position", "absolute").style("text-align", "center").style("width", "120px").style("height", "50px").style("padding", "2px")
