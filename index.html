@@ -7,8 +7,8 @@
     <title>Global Health and Life Expectancy</title>
 </head>
 <body onload="loadScene1()">
-    <button id="prev-button" onclick="loadPreviousScene()" disabled>Previous</button>
-    <button id="next-button" onclick="loadNextScene()">Next</button>
+    <button id="prev-button" onclick="navigate('index.html')" disabled>Previous</button>
+    <button id="next-button" onclick="navigate('scene2.html')">Next</button>
     <h1>
         <center>
             Global Health and Life Expectancy
@@ -16,63 +16,9 @@
     </h1>
     <div id="scene-container"></div>
     <script src="scene1.js"></script>
-    <script src="scene2.js" defer></script>
-    <script src="scene3.js" defer></script>
     <script>
-        let currentScene = 0;
-        const scenes = [loadScene1, loadScene2, loadScene3];
-
-        function loadPreviousScene() {
-            if (currentScene > 0) {
-                currentScene--;
-                scenes[currentScene]();
-                document.getElementById('next-button').disabled = false;
-                if (currentScene === 0) {
-                    document.getElementById('prev-button').disabled = true;
-                }
-            }
-        }
-
-        function loadNextScene() {
-            if (currentScene < scenes.length - 1) {
-                currentScene++;
-                scenes[currentScene]();
-                document.getElementById('prev-button').disabled = false;
-                if (currentScene === scenes.length - 1) {
-                    document.getElementById('next-button').disabled = true;
-                }
-            }
-        }
-
-        function loadScene1() {
-            document.getElementById('scene-container').innerHTML = '';
-            d3.select("#scene-container").append("div").attr("id", "scene1-container");
-            d3.select("#next-button").setAttribute('onclick', 'loadNextScene()');
-            d3.select("#prev-button").setAttribute('onclick', 'loadPreviousScene()');
-            currentScene = 0;
-            loadScene1();
-        }
-
-        function loadScene2() {
-            document.getElementById('scene-container').innerHTML = '';
-            d3.select("#scene-container").append("div").attr("id", "scene2-container");
-            d3.select("#next-button").setAttribute('onclick', 'loadNextScene()');
-            d3.select("#prev-button").setAttribute('onclick', 'loadPreviousScene()');
-            currentScene = 1;
-            loadScene2();
-        }
-
-        function loadScene3() {
-            document.getElementById('scene-container').innerHTML = '';
-            d3.select("#scene-container").append("div").attr("id", "scene3-container");
-            d3.select("#next-button").setAttribute('onclick', 'loadNextScene()');
-            d3.select("#prev-button").setAttribute('onclick', 'loadPreviousScene()');
-            currentScene = 2;
-            loadScene3();
-        }
-
-        window.onload = function() {
-            loadScene1();
+        function navigate(url) {
+            window.location.href = url;
         }
     </script>
 </body>

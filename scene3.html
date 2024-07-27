@@ -1,2 +1,26 @@
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Mortality Rates by Cause</title>
+</head>
+<body onload="loadScene3()">
+    <button id="prev-button" onclick="navigate('scene2.html')">Previous</button>
+    <h1>
+        <center>
+            Mortality Rates by Cause
+        </center>
+    </h1>
+    <div id="scene-container"></div>
+    <script src="scene3.js"></script>
+    <script>
+        function navigate(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

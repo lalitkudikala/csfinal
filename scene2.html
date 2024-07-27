@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Healthcare Expenditure by Country</title>
+</head>
+<body onload="loadScene2()">
+    <button id="prev-button" onclick="navigate('index.html')">Previous</button>
+    <button id="next-button" onclick="navigate('scene3.html')">Next</button>
+    <h1>
+        <center>
+            Healthcare Expenditure by Country
+        </center>
+    </h1>
+    <div id="scene-container"></div>
+    <script src="scene2.js"></script>
+    <script>
+        function navigate(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
