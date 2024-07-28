@@ -1,13 +1,13 @@
-Country,Category,Expenditure
-USA,Hospital Services,38
-USA,Outpatient Services,35
-USA,Medical Goods,15
-USA,Preventive Care,12
-India,Hospital Services,45
-India,Outpatient Services,25
-India,Medical Goods,20
-India,Preventive Care,10
-China,Hospital Services,50
-China,Outpatient Services,20
-China,Medical Goods,20
-China,Preventive Care,10
+Country,Category,Expenditure_Percentage
+USA,Hospital Care,30
+USA,Physician Services,20
+USA,Prescription Drugs,9
+USA,Other Health Spending,41
+China,Hospital Care,40
+China,Physician Services,20
+China,Prescription Drugs,18
+China,Other Health Spending,22
+India,Hospital Care,48
+India,Physician Services,22
+India,Prescription Drugs,13
+India,Other Health Spending,17

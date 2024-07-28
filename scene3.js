@@ -1,5 +1,5 @@
 function loadScene3() {
-    d3.csv("healthcare_expenditure.csv").then(function(data) {
+    d3.csv("healthcare_categories.csv").then(function(data) {
         data.forEach(d => {
             d.Expenditure_Percentage = +d.Expenditure_Percentage;
         });
