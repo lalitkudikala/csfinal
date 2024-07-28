@@ -49,23 +49,7 @@ function loadScene2() {
                 });
         });
 
-        // Add legend
-        var legend = svg.append("g")
-            .attr("transform", `translate(${width + margin.right / 2}, ${margin.top})`);
-
-        nestedData.forEach((values, key, i) => {
-            legend.append("rect")
-                .attr("x", 0)
-                .attr("y", i * 20)
-                .attr("width", 10)
-                .attr("height", 10)
-                .attr("fill", color(key));
-
-            legend.append("text")
-                .attr("x", 20)
-                .attr("y", i * 20 + 10)
-                .text(key);
-        });
+        
         d3.select("#scene-container").append("div")
             .attr("class", "paragraph")
             .style("width", "800px")
