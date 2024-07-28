@@ -5,9 +5,9 @@ function loadScene3() {
             d.Expenditure = +d.Expenditure;
         });
 
-        var svg = d3.select("#scene-container").append("svg").attr("width", 1000).attr("height", 500);
-        var margin = {top: 50, right: 150, bottom: 50, left: 50};
-        var width = 800 - margin.left - margin.right;
+        var svg = d3.select("#scene-container").append("svg").attr("width", 1200).attr("height", 500);
+        var margin = {top: 50, right: 200, bottom: 50, left: 50};
+        var width = 1000 - margin.left - margin.right;
         var height = 400 - margin.top - margin.bottom;
 
         var color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -24,7 +24,7 @@ function loadScene3() {
         countries.forEach((country, i) => {
             console.log("Processing country:", country); // Debugging statement
             var g = svg.append("g")
-                .attr("transform", `translate(${margin.left + i * 250 + 150}, ${height / 2})`);
+                .attr("transform", `translate(${margin.left + i * 300 + 150}, ${height / 2})`);
 
             var arcs = g.selectAll(".arc")
                 .data(pie(countryData[country]))
@@ -59,9 +59,10 @@ function loadScene3() {
 
         // Add legend
         var legend = svg.append("g")
-            .attr("transform", `translate(${width + margin.right}, ${margin.top})`);
+            .attr("transform", `translate(${width + 300}, ${margin.top})`); // Moved legend to the right
 
-        color.domain().forEach((category, i) => {
+        var categories = Array.from(new Set(data.map(d => d.Category)));
+        categories.forEach((category, i) => {
             legend.append("rect")
                 .attr("x", 0)
                 .attr("y", i * 20)
@@ -74,6 +75,13 @@ function loadScene3() {
                 .attr("y", i * 20 + 10)
                 .text(category);
         });
+
+        // Add description below the graph
+        d3.select("#scene-container").append("div")
+            .attr("class", "paragraph")
+            .style("width", "1000px")
+            .style("margin-top", "20px")
+            .html("<p>These pie charts illustrate the distribution of healthcare expenditure categories for the USA, India, and China. The USA spends a significant portion on 'Other Health Spending', reflecting a diverse allocation of healthcare resources. India has a high percentage allocated to 'Hospital Care', indicating a focus on hospital infrastructure. China shows a balanced distribution among the categories, with significant expenditure in 'Hospital Care' and 'Prescription Drugs'. This distribution reflects the different healthcare priorities and economic structures of each country.</p>");
     }).catch(function(error) {
         console.error("Error loading the data:", error);
     });
