@@ -8,11 +8,17 @@
 </head>
 <body onload="loadScene3()">
     <button id="prev-button" onclick="navigate('scene2.html')">Previous</button>
+    <button id="prev-button" onclick="navigate('index.html')" disabled>Next</button>
     <h1>
         <center>
             Healthcare Expenditure Categories by Country
         </center>
     </h1>
+    <p class="p1">Use the next and previous buttons to navigate and scroll down to learn more.</p>
+
+    <p class="p2">Original healthcare expenditure dataset: 
+        <a href="https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS" target="_blank">
+            https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS</a></p>
     <div id="scene-container"></div>
     <script src="scene3.js"></script>
     <script>
