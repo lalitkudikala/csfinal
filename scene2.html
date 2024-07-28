@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Healthcare Expenditure in USA, China, India</title>
+    <title>Healthcare Expenditure</title>
 </head>
 <body onload="loadScene2()">
     <button id="prev-button" onclick="navigate('index.html')">Previous</button>
     <button id="next-button" onclick="navigate('scene3.html')">Next</button>
     <h1>
         <center>
-            Healthcare Expenditure in USA, China, India
+            Healthcare Expenditure by Country (2000-2021)
         </center>
     </h1>
     <div id="scene-container"></div>
@@ -21,5 +21,6 @@
             window.location.href = url;
         }
     </script>
+    <div id="tooltip" style="position: absolute; text-align: center; width: 120px; height: 50px; padding: 2px; font: 12px sans-serif; background: lightsteelblue; border: 0px; border-radius: 8px; pointer-events: none; display: none;"></div>
 </body>
 </html>

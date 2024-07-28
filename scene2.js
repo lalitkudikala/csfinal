@@ -66,6 +66,11 @@ function loadScene2() {
                 .attr("y", i * 20 + 10)
                 .text(key);
         });
+        d3.select("#scene-container").append("div")
+            .attr("class", "paragraph")
+            .style("width", "800px")
+            .style("margin-top", "20px")
+            .html("<p>This graph illustrates healthcare expenditure as a percentage of GDP from 2000 to 2021 for India, China, and the USA. The USA shows consistently high expenditure, peaking significantly in 2020 due to extra research spent on fighting the coronavirus. The constant increased expenditure is due to a multitude of causes such high insurance rates, retail prescription drugs, and salaries. There is also the problem of the notorious bad diets in the USA that are the cause of many health issues such as obesity. On the other hand, China displays steady growth in healthcare spending, reflecting its expanding economy and improvements in healthcare. India's expenditure shows slight fluctuations but remains lower compared to the other two countries, indicating different priorities or levels of investment in healthcare. This conflicts with the idea of their high rate of growth in life expectancy, however, it tells us about the country's efficient processes and ability to grow even with proportionally smaller budgets.</p>");
 
         g.append("text").attr("x", width / 2).attr("y", -10).attr("text-anchor", "middle").attr("class", "annotation").text("Healthcare Expenditure by Country (2000-2021)");
     });
